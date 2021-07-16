@@ -6,7 +6,7 @@ import 'package:hellocock/size_config.dart';
 // clolors that we use in our app
 const kMainColor = Colors.black54;
 const kActiveColor = Color(0xFF00C8FF);
-const kAccentColor = Color(0xFFEF9920);
+const kAccentColor = Color(0xFFFFFFC3);
 const kBodyTextColor = Color(0xFF6F6F6F);
 const kInputColor = Color(0xFFFBFBFB);
 const kBgColor = Colors.white;

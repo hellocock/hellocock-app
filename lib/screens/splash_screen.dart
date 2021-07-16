@@ -22,7 +22,7 @@ class _SplashScreenState extends State<SplashScreen> {
   Future checkFirstSeen() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     bool _seen = (prefs.getBool('seen') ?? false);
-    //final FirebaseMessaging fcm = FirebaseMessaging();
+    final FirebaseMessaging fcm = FirebaseMessaging.instance;
     // if (Platform.isIOS) {
     //   // 권한이 설정되지 않았으면 요청하는 창을 띄움
     //   fcm.requestNotificationPermissions(

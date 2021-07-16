@@ -170,7 +170,7 @@ class _PickupState extends State<Pickup> {
                         Text(
                           DateFormat('HH:mm').format(_chosenDateTime),
                           style: TextStyle(
-                              fontSize: 12,
+                              fontSize: 13,
                               fontWeight: FontWeight.bold,
                               color: Colors.grey[600]),
                         ),
@@ -220,19 +220,18 @@ class _PickupState extends State<Pickup> {
           ],
         ),
         VerticalSpacing(of: 30),
-        Container(
-          width: 300,
-          height: 300,
-          child: Opacity(
-            opacity: 0.8,
-            child: GoogleMap(
-              initialCameraPosition:
-                  CameraPosition(target: LatLng(latitude, longitude), zoom: 16),
-              onMapCreated: (GoogleMapController controller) {
-                _controller.complete(controller);
-              },
-              markers: Set.from(allMarkers),
-              myLocationButtonEnabled: false,
+        Center(
+          child: Container(
+            width: 300,
+            height: 300,
+            child: Opacity(
+              opacity: 0.8,
+              child: GoogleMap(
+                initialCameraPosition: CameraPosition(
+                    target: LatLng(latitude, longitude), zoom: 16),
+                markers: Set.from(allMarkers),
+                myLocationButtonEnabled: false,
+              ),
             ),
           ),
         ),

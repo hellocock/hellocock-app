@@ -53,13 +53,13 @@ class _StorePanelState extends State<StorePanel> {
               ],
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 30, left: 30.0, bottom: 20),
+              padding: const EdgeInsets.only(top: 30, left: 30.0, bottom: 15),
               child: Text(
                 "픽업 장소 및 시간",
                 textScaleFactor: 1,
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: 18.0,
+                    fontSize: 20.0,
                     color: kActiveColor),
               ),
             ),
@@ -91,126 +91,63 @@ class _StorePanelState extends State<StorePanel> {
   }
 
   Widget _buildListStore(DocumentSnapshot document) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 25, bottom: 20),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          ClipRRect(
-              borderRadius: BorderRadius.all(Radius.circular(12)),
-              child: CachedNetworkImage(
-                imageUrl: document['image'],
-                height: 145,
-                width: 145,
-                fit: BoxFit.cover,
-              )),
-          HorizontalSpacing(),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                document['name'],
-                textScaleFactor: 1,
-                style: TextStyle(
-                    color: kBodyTextColor,
-                    fontWeight: FontWeight.bold,
+    return TextButton(
+      onPressed: () => Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) =>
+              MenuScreen(widget.user, widget.cocktaildocument, document),
+        ),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.only(left: 20, right: 20, top: 5, bottom: 5),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            ClipRRect(
+                borderRadius: BorderRadius.all(Radius.circular(12)),
+                child: CachedNetworkImage(
+                  imageUrl: document['image'],
+                  height: 140,
+                  width: 140,
+                  fit: BoxFit.cover,
+                )),
+            HorizontalSpacing(),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  document['name'],
+                  textScaleFactor: 1,
+                  style: TextStyle(
+                      color: kBodyTextColor,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                      height: 1.5),
+                ),
+                VerticalSpacing(of: 10),
+                Text(
+                  document['explain'].replaceAll("\\n", "\n"),
+                  textScaleFactor: 1,
+                  style: TextStyle(
                     fontSize: 14,
-                    height: 1.5),
-              ),
-              VerticalSpacing(of: 5),
-              Text(
-                document['explain'].replaceAll("\\n", "\n"),
-                textScaleFactor: 1,
-                style: TextStyle(
-                  fontSize: 12,
-                  color: kBodyTextColor,
+                    color: kBodyTextColor,
+                  ),
                 ),
-              ),
-              VerticalSpacing(of: 5),
-              Text(
-                document['opening_hours'],
-                textScaleFactor: 1,
-                style: TextStyle(
-                  fontSize: 12,
-                  color: kBodyTextColor,
+                VerticalSpacing(of: 10),
+                Text(
+                  document['opening_hours'],
+                  textScaleFactor: 1,
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: kBodyTextColor,
+                  ),
                 ),
-              ),
-              VerticalSpacing(
-                of: 5,
-              ),
-              Row(
-                children: [
-                  SizedBox(
-                    width: 80,
-                    height: 30,
-                    child: RaisedButton(
-                      child: Text(
-                        "안주보기",
-                        textScaleFactor: 1,
-                        style: TextStyle(
-                          fontSize: 13,
-                          fontWeight: FontWeight.bold,
-                          color: kBodyTextColor,
-                        ),
-                      ),
-                      onPressed: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => MenuScreen(
-                              widget.user, widget.cocktaildocument, document),
-                        ),
-                      ),
-                      color: Colors.white,
-                    ),
-                  ),
-                  HorizontalSpacing(
-                    of: 10,
-                  ),
-                  SizedBox(
-                    width: 80,
-                    height: 30,
-                    child: RaisedButton(
-                      child: Text(
-                        "수령하기",
-                        textScaleFactor: 1,
-                        style: TextStyle(
-                          fontSize: 13,
-                          fontWeight: FontWeight.bold,
-                          color: kBodyTextColor,
-                        ),
-                      ),
-                      onPressed: () {
-                        FirebaseFirestore.instance
-                            .collection("cart")
-                            .doc(widget.user.email)
-                            .update(
-                          {
-                            'store': document['name'],
-                            'pickup_time': DateTime(
-                                DateTime.now().year,
-                                DateTime.now().month,
-                                DateTime.now().day,
-                                18,
-                                00),
-                          },
-                        );
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  OrderScreen(widget.user, document),
-                            ));
-                      },
-                      color: Colors.white,
-                    ),
-                  ),
-                ],
-              ),
-              VerticalSpacing(of: 5),
-            ],
-          ),
-        ],
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

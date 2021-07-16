@@ -49,360 +49,368 @@ class _BodyState extends State<Body> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
-          child: Column(
-            children: [
-              Order(widget.user, widget.cart, widget.store),
-              QuantityCard(
-                quantity: widget.cart['cocktail']['quantity'],
-                onpressed1: () {
-                  if (widget.cart['cocktail']['quantity'] > 1) {
-                    setState(() {
-                      FirebaseFirestore.instance
-                          .collection("cart")
-                          .doc(widget.user.email)
-                          .update({
-                        'cocktail': {
-                          'name': widget.cart['cocktail']['name'],
-                          'price': widget.cart['cocktail']['price'],
-                          'quantity': widget.cart['cocktail']['quantity'] - 1
-                        },
-                      });
-                      _totalprice =
-                          _totalprice - widget.cart['cocktail']['price'];
-                    });
-                  }
-                },
-                onpressed2: () {
-                  setState(() {
-                    FirebaseFirestore.instance
-                        .collection("cart")
-                        .doc(widget.user.email)
-                        .update(
-                      {
-                        'cocktail': {
-                          'name': widget.cart['cocktail']['name'],
-                          'price': widget.cart['cocktail']['price'],
-                          'quantity': widget.cart['cocktail']['quantity'] + 1
-                        },
-                      },
-                    );
-                    _totalprice =
-                        _totalprice + widget.cart['cocktail']['price'];
-                  });
-                },
-              ),
-              Pickup(widget.user, widget.cart, widget.store),
-              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                SizedBox(
-                  height: 50,
-                ),
-                Text(
-                  "결제 진행",
-                  textScaleFactor: 1,
-                  style: TextStyle(
-                      color: kActiveColor,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold),
-                ),
-                VerticalSpacing(
-                  of: 30,
-                ),
-                Text(
-                  "주문 금액",
-                  textScaleFactor: 1,
-                  style: TextStyle(
-                      fontSize: 17,
-                      color: kBodyTextColor,
-                      fontWeight: FontWeight.bold),
-                ),
-                VerticalSpacing(
-                  of: 20,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                        widget.cart['cocktail']['name'] +
-                            " 키트 " +
-                            widget.cart['cocktail']['quantity'].toString() +
-                            "개",
-                        textScaleFactor: 1,
-                        style: TextStyle(
-                            fontSize: 15,
-                            color: kBodyTextColor,
-                            fontWeight: FontWeight.w500)),
-                    Text(
-                      (widget.cart['cocktail']['price'] *
-                                  widget.cart['cocktail']['quantity'])
-                              .toString() +
-                          "원",
-                      textScaleFactor: 1,
-                      style: TextStyle(
-                          color: Color(0xFFFF4D4D),
-                          fontWeight: FontWeight.w500),
-                    )
-                  ],
-                ),
-                ListView.builder(
-                  itemCount: widget.cart['food'] == null
-                      ? 0
-                      : widget.cart['food'].length,
-                  shrinkWrap: true,
-                  itemBuilder: (BuildContext context, int index) {
-                    return Column(
-                      children: [
-                        VerticalSpacing(),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                                widget.cart['food'][index]['name'] +
-                                    " " +
-                                    widget.cart['food'][index]['quantity']
-                                        .toString() +
-                                    "개",
-                                textScaleFactor: 1,
-                                style: TextStyle(
-                                    fontSize: 15,
-                                    color: kBodyTextColor,
-                                    fontWeight: FontWeight.w500)),
-                            Text(
-                              (widget.cart['food'][index]['price'] *
-                                          widget.cart['food'][index]
-                                              ['quantity'])
-                                      .toString() +
-                                  "원",
-                              textScaleFactor: 1,
-                              style: TextStyle(
-                                  color: Color(0xFFFF4D4D),
-                                  fontWeight: FontWeight.w500),
-                            )
-                          ],
-                        ),
-                      ],
-                    );
-                  },
-                ),
-                VerticalSpacing(),
-                Divider(
-                  thickness: 1.5,
-                  color: kBodyTextColor,
-                ),
-                VerticalSpacing(),
-                StreamBuilder<Object>(
-                    stream: FirebaseFirestore.instance
-                        .collection("cart")
-                        .snapshots(),
-                    builder: (context, snapshot) {
-                      _totalprice = widget.cart['cocktail']['price'] *
-                          widget.cart['cocktail']['quantity'];
+    return StreamBuilder<Object>(
+        stream: FirebaseFirestore.instance.collection("cart").snapshots(),
+        builder: (context, snapshot) {
+          _totalprice = widget.cart['cocktail']['price'] *
+              widget.cart['cocktail']['quantity'];
 
-                      for (int i = 0; i < widget.cart['food'].length; i++) {
-                        _totalprice += (widget.cart['food'][i]['price'] *
-                            widget.cart['food'][i]['quantity']);
-                      }
-                      return Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          for (int i = 0; i < widget.cart['food'].length; i++) {
+            _totalprice += (widget.cart['food'][i]['price'] *
+                widget.cart['food'][i]['quantity']);
+          }
+          return SafeArea(
+            child: SingleChildScrollView(
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: kDefaultPadding),
+                child: Column(
+                  children: [
+                    Order(widget.user, widget.cart, widget.store),
+                    QuantityCard(
+                      quantity: widget.cart['cocktail']['quantity'],
+                      onpressed1: () {
+                        if (widget.cart['cocktail']['quantity'] > 1) {
+                          setState(() {
+                            FirebaseFirestore.instance
+                                .collection("cart")
+                                .doc(widget.user.email)
+                                .update({
+                              'cocktail': {
+                                'name': widget.cart['cocktail']['name'],
+                                'price': widget.cart['cocktail']['price'],
+                                'quantity':
+                                    widget.cart['cocktail']['quantity'] - 1
+                              },
+                            });
+                            _totalprice =
+                                _totalprice - widget.cart['cocktail']['price'];
+                          });
+                        }
+                      },
+                      onpressed2: () {
+                        setState(() {
+                          FirebaseFirestore.instance
+                              .collection("cart")
+                              .doc(widget.user.email)
+                              .update(
+                            {
+                              'cocktail': {
+                                'name': widget.cart['cocktail']['name'],
+                                'price': widget.cart['cocktail']['price'],
+                                'quantity':
+                                    widget.cart['cocktail']['quantity'] + 1
+                              },
+                            },
+                          );
+                          _totalprice =
+                              _totalprice + widget.cart['cocktail']['price'];
+                        });
+                      },
+                    ),
+                    Pickup(widget.user, widget.cart, widget.store),
+                    Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text("총 결제 금액",
-                              textScaleFactor: 1,
-                              style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                  color: kBodyTextColor)),
+                          SizedBox(
+                            height: 50,
+                          ),
                           Text(
-                            _totalprice.toString() + "원",
+                            "결제 진행",
                             textScaleFactor: 1,
                             style: TextStyle(
-                                color: Color(0xFFFF4D4D),
+                                color: kActiveColor,
+                                fontSize: 20,
                                 fontWeight: FontWeight.bold),
-                          )
-                        ],
-                      );
-                    }),
-                VerticalSpacing(of: 15),
-                Text(
-                  "위 내용을 확인하였으며 결제에 동의합니다.",
-                  textScaleFactor: 1,
-                  style: TextStyle(fontSize: 12, color: kBodyTextColor),
-                ),
-                VerticalSpacing(
-                  of: 30,
-                )
-              ]),
-              Row(
-                children: [
-                  SizedBox(
-                    width: 30,
-                    height: 30,
-                    child: Checkbox(
-                      value: value_all,
-                      onChanged: (bool value) {
-                        setState(() {
-                          value_all = !value_all;
-                          if (value_all = true) {
-                            value1 = true;
-                            value2 = true;
-                          }
-                        });
-                      },
-                      hoverColor: kActiveColor,
-                      focusColor: kActiveColor,
-                      activeColor: kActiveColor,
-                    ),
-                  ),
-                  Text(
-                    " 모든 약관 동의",
-                    textScaleFactor: 1,
-                    style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold,
-                        color: kBodyTextColor),
-                  ),
-                ],
-              ),
-              Divider(
-                thickness: 1.5,
-                color: kBodyTextColor,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    children: [
-                      SizedBox(
-                        width: 30,
-                        height: 30,
-                        child: Checkbox(
-                          value: value1,
-                          onChanged: (bool value) {
-                            setState(() {
-                              value1 = !value1;
-                              if (value1 == false) value_all = false;
-                            });
-                          },
-                          hoverColor: kActiveColor,
-                          focusColor: kActiveColor,
-                          activeColor: kActiveColor,
-                        ),
-                      ),
-                      Text(
-                        " [필수] 술픽업 이용약관",
-                        textScaleFactor: 1,
-                        style: TextStyle(fontSize: 13, color: kBodyTextColor),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 30,
-                    child: IconButton(
-                      icon: SvgPicture.asset("assets/icons/arrow_next.svg"),
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => PickupPolicyScreen(),
                           ),
-                        );
-                      },
-                    ),
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    children: [
-                      SizedBox(
-                        width: 30,
-                        height: 30,
-                        child: Checkbox(
-                          value: value2,
-                          onChanged: (bool value) {
-                            setState(() {
-                              value2 = !value2;
-                              if (value2 == false) value_all = false;
-                            });
-                          },
-                          hoverColor: kActiveColor,
-                          focusColor: kActiveColor,
-                          activeColor: kActiveColor,
-                        ),
-                      ),
-                      Text(
-                        " [필수] 청약철회방침",
-                        textScaleFactor: 1,
-                        style: TextStyle(fontSize: 13, color: kBodyTextColor),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 30,
-                    child: IconButton(
-                      icon: SvgPicture.asset("assets/icons/arrow_next.svg"),
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => PaymentPolicyScreen(),
+                          VerticalSpacing(
+                            of: 30,
                           ),
-                        );
-                      },
-                    ),
-                  ),
-                ],
-              ),
-              VerticalSpacing(
-                of: 50,
-              ),
-              PrimaryButton(
-                press: () {
-                  if (value1 == true && value2 == true)
-                    goBootpayRequest(context);
-                  else {
-                    showDialog(
-                        context: context,
-                        barrierDismissible: false,
-                        builder: (context) {
-                          return CupertinoAlertDialog(
-                            content: Text(
-                              "약관에 동의해야 결제가 가능합니다.",
-                              style: TextStyle(
-                                fontSize: 13,
+                          Text(
+                            "주문 금액",
+                            textScaleFactor: 1,
+                            style: TextStyle(
+                                fontSize: 17,
                                 color: kBodyTextColor,
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
-                            actions: <Widget>[
-                              new CupertinoDialogAction(
-                                child: Text(
-                                  '확인',
-                                  style: TextStyle(fontSize: 15),
-                                ),
-                                onPressed: () {
-                                  Navigator.of(context).pop();
-                                },
-                              ),
+                                fontWeight: FontWeight.bold),
+                          ),
+                          VerticalSpacing(
+                            of: 20,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                  widget.cart['cocktail']['name'] +
+                                      " 키트 " +
+                                      widget.cart['cocktail']['quantity']
+                                          .toString() +
+                                      "개",
+                                  textScaleFactor: 1,
+                                  style: TextStyle(
+                                      fontSize: 15,
+                                      color: kBodyTextColor,
+                                      fontWeight: FontWeight.w500)),
+                              Text(
+                                (widget.cart['cocktail']['price'] *
+                                            widget.cart['cocktail']['quantity'])
+                                        .toString() +
+                                    "원",
+                                textScaleFactor: 1,
+                                style: TextStyle(
+                                    color: Color(0xFFFF4D4D),
+                                    fontWeight: FontWeight.w500),
+                              )
                             ],
-                          );
-                        });
-                  }
-                },
-                text: "결제하기",
+                          ),
+                          ListView.builder(
+                            itemCount: widget.cart['food'] == null
+                                ? 0
+                                : widget.cart['food'].length,
+                            shrinkWrap: true,
+                            itemBuilder: (BuildContext context, int index) {
+                              return Column(
+                                children: [
+                                  VerticalSpacing(),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                          widget.cart['food'][index]['name'] +
+                                              " " +
+                                              widget.cart['food'][index]
+                                                      ['quantity']
+                                                  .toString() +
+                                              "개",
+                                          textScaleFactor: 1,
+                                          style: TextStyle(
+                                              fontSize: 15,
+                                              color: kBodyTextColor,
+                                              fontWeight: FontWeight.w500)),
+                                      Text(
+                                        (widget.cart['food'][index]['price'] *
+                                                    widget.cart['food'][index]
+                                                        ['quantity'])
+                                                .toString() +
+                                            "원",
+                                        textScaleFactor: 1,
+                                        style: TextStyle(
+                                            color: Color(0xFFFF4D4D),
+                                            fontWeight: FontWeight.w500),
+                                      )
+                                    ],
+                                  ),
+                                ],
+                              );
+                            },
+                          ),
+                          VerticalSpacing(),
+                          Divider(
+                            thickness: 1.5,
+                            color: kBodyTextColor,
+                          ),
+                          VerticalSpacing(),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text("총 결제 금액",
+                                  textScaleFactor: 1,
+                                  style: TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold,
+                                      color: kBodyTextColor)),
+                              Text(
+                                _totalprice.toString() + "원",
+                                textScaleFactor: 1,
+                                style: TextStyle(
+                                    color: Color(0xFFFF4D4D),
+                                    fontWeight: FontWeight.bold),
+                              )
+                            ],
+                          ),
+                          VerticalSpacing(of: 15),
+                          Text(
+                            "위 내용을 확인하였으며 결제에 동의합니다.",
+                            textScaleFactor: 1,
+                            style:
+                                TextStyle(fontSize: 12, color: kBodyTextColor),
+                          ),
+                          VerticalSpacing(
+                            of: 30,
+                          )
+                        ]),
+                    Row(
+                      children: [
+                        SizedBox(
+                          width: 30,
+                          height: 30,
+                          child: Checkbox(
+                            value: value_all,
+                            onChanged: (bool value) {
+                              setState(() {
+                                value_all = !value_all;
+                                if (value_all = true) {
+                                  value1 = true;
+                                  value2 = true;
+                                }
+                              });
+                            },
+                            hoverColor: kActiveColor,
+                            focusColor: kActiveColor,
+                            activeColor: kActiveColor,
+                          ),
+                        ),
+                        Text(
+                          " 모든 약관 동의",
+                          textScaleFactor: 1,
+                          style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                              color: kBodyTextColor),
+                        ),
+                      ],
+                    ),
+                    Divider(
+                      thickness: 1.5,
+                      color: kBodyTextColor,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            SizedBox(
+                              width: 30,
+                              height: 30,
+                              child: Checkbox(
+                                value: value1,
+                                onChanged: (bool value) {
+                                  setState(() {
+                                    value1 = !value1;
+                                    if (value1 == false) value_all = false;
+                                  });
+                                },
+                                hoverColor: kActiveColor,
+                                focusColor: kActiveColor,
+                                activeColor: kActiveColor,
+                              ),
+                            ),
+                            Text(
+                              " [필수] 술픽업 이용약관",
+                              textScaleFactor: 1,
+                              style: TextStyle(
+                                  fontSize: 13, color: kBodyTextColor),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 30,
+                          child: IconButton(
+                            icon:
+                                SvgPicture.asset("assets/icons/arrow_next.svg"),
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => PickupPolicyScreen(),
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            SizedBox(
+                              width: 30,
+                              height: 30,
+                              child: Checkbox(
+                                value: value2,
+                                onChanged: (bool value) {
+                                  setState(() {
+                                    value2 = !value2;
+                                    if (value2 == false) value_all = false;
+                                  });
+                                },
+                                hoverColor: kActiveColor,
+                                focusColor: kActiveColor,
+                                activeColor: kActiveColor,
+                              ),
+                            ),
+                            Text(
+                              " [필수] 청약철회방침",
+                              textScaleFactor: 1,
+                              style: TextStyle(
+                                  fontSize: 13, color: kBodyTextColor),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 30,
+                          child: IconButton(
+                            icon:
+                                SvgPicture.asset("assets/icons/arrow_next.svg"),
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => PaymentPolicyScreen(),
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                    VerticalSpacing(
+                      of: 30,
+                    ),
+                    PrimaryButton(
+                      press: () {
+                        if (value1 == true && value2 == true)
+                          goBootpayRequest(context);
+                        else {
+                          showDialog(
+                              context: context,
+                              barrierDismissible: false,
+                              builder: (context) {
+                                return CupertinoAlertDialog(
+                                  content: Text(
+                                    "약관에 동의해야 결제가 가능합니다.",
+                                    style: TextStyle(
+                                      fontSize: 13,
+                                      color: kBodyTextColor,
+                                    ),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                  actions: <Widget>[
+                                    new CupertinoDialogAction(
+                                      child: Text(
+                                        '확인',
+                                        style: TextStyle(fontSize: 15),
+                                      ),
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                    ),
+                                  ],
+                                );
+                              });
+                        }
+                      },
+                      text: "결제하기",
+                    ),
+                  ],
+                ),
               ),
-              VerticalSpacing(
-                of: 50,
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
+            ),
+          );
+        });
   }
 
   Widget foodwidget(int index) {

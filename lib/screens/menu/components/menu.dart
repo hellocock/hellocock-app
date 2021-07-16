@@ -38,19 +38,19 @@ class _MenuCardState extends State<MenuCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 100,
+      height: 110,
       child: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
         ClipRRect(
             borderRadius: BorderRadius.all(Radius.circular(12)),
             child: CachedNetworkImage(
               imageUrl: widget.store['food'][widget.index]['image'],
-              height: 82,
-              width: 123,
+              height: 85,
+              width: 130,
               fit: BoxFit.cover,
             )),
         HorizontalSpacing(),
         Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
@@ -58,37 +58,33 @@ class _MenuCardState extends State<MenuCard> {
                 textScaleFactor: 1,
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: 13,
+                    fontSize: 15,
                     color: kBodyTextColor),
               ),
               Text(
                 widget.store['food'][widget.index]['explain']
                     .replaceAll("\\n", '\n'),
                 textScaleFactor: 1,
-                style: TextStyle(fontSize: 12, color: kBodyTextColor),
+                style: TextStyle(fontSize: 14, color: kBodyTextColor),
+              ),
+              VerticalSpacing(
+                of: 5,
               ),
               Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  SizedBox(
-                    width: 80,
-                    height: 30,
-                    child: Padding(
-                      padding: const EdgeInsets.only(
-                        right: 10.0,
-                        top: 12,
-                      ),
-                      child: Text(
-                        widget.store['food'][widget.index]['price'].toString() +
-                            "원",
-                        textScaleFactor: 1,
-                        style: TextStyle(
-                          fontSize: 13,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xFFFF4D4D),
-                        ),
-                      ),
+                  Text(
+                    widget.store['food'][widget.index]['price'].toString() +
+                        "원",
+                    textScaleFactor: 1,
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFFFF4D4D),
                     ),
                   ),
+                  HorizontalSpacing(of: 50),
                   Card(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8.0),

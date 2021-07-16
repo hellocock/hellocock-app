@@ -81,11 +81,11 @@ class _BodyState extends State<Body> {
                                     of: 30,
                                   ),
                                   Text(
-                                    "헬로 " + widget.user.displayName,
+                                    "hello, " + widget.user.displayName,
                                     textScaleFactor: 1,
                                     style: TextStyle(
                                         fontSize: 15,
-                                        fontWeight: FontWeight.bold,
+                                        //fontWeight: FontWeight.bold,
                                         color: kBodyTextColor),
                                   ),
                                   VerticalSpacing(),

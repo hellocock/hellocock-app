@@ -48,7 +48,7 @@ class _BodyState extends State<Body> {
                           VerticalSpacing(of: 30),
                           Center(
                             child: Text(
-                              "마이콕은 그동안 마셨던 칵테일을 \n확인할 수 있는 나만의 bar 입니다!\n헬로콕의 칵테일 키트와 마이콕을 \n채워봐요~",
+                              "나의 칵테일 콜렉션이 비어 있어요 ㅠ,ㅠ",
                               textScaleFactor: 1,
                               style: TextStyle(
                                   fontSize: 20,

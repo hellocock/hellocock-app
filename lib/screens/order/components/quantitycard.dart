@@ -29,11 +29,11 @@ class _QuantityCardState extends State<QuantityCard> {
   Widget build(BuildContext context) {
     return Card(
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(14.0),
+        borderRadius: BorderRadius.circular(10.0),
       ),
       elevation: 2.0,
       child: Container(
-        width: 275,
+        width: 350,
         height: 38,
         child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
