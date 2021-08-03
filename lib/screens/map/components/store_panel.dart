@@ -100,7 +100,7 @@ class _StorePanelState extends State<StorePanel> {
         ),
       ),
       child: Padding(
-        padding: const EdgeInsets.only(left: 20, right: 20, top: 5, bottom: 5),
+        padding: const EdgeInsets.only(left: 20, right: 20, bottom: 10),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
@@ -114,7 +114,7 @@ class _StorePanelState extends State<StorePanel> {
                 )),
             HorizontalSpacing(),
             Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
@@ -123,7 +123,7 @@ class _StorePanelState extends State<StorePanel> {
                   style: TextStyle(
                       color: kBodyTextColor,
                       fontWeight: FontWeight.bold,
-                      fontSize: 16,
+                      fontSize: 17,
                       height: 1.5),
                 ),
                 VerticalSpacing(of: 10),

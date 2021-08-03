@@ -85,7 +85,7 @@ class _BodyState extends State<Body> {
                                     textScaleFactor: 1,
                                     style: TextStyle(
                                         fontSize: 15,
-                                        //fontWeight: FontWeight.bold,
+                                        fontWeight: FontWeight.bold,
                                         color: kBodyTextColor),
                                   ),
                                   VerticalSpacing(),
