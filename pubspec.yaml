@@ -38,7 +38,7 @@ dependencies:
   json_serializable: ^3.5.1
   sliding_up_panel: ^1.0.2
   search_widget: ^1.0.2
-  kopo: ^0.1.1 
+  remedi_kopo: ^0.0.1 
   flutter_local_notifications: ^6.0.0
   flutter_advanced_switch: ^0.0.9+4
   firebase_messaging: ^10.0.2

@@ -6,7 +6,7 @@ import 'package:hellocock/constants.dart';
 import 'package:hellocock/size_config.dart';
 import 'package:hellocock/screens/bottom_nav_bar.dart';
 import 'package:hellocock/widgets/buttons/primary_button.dart';
-import 'package:kopo/kopo.dart';
+import 'package:remedi_kopo/remedi_kopo.dart';
 
 class ModifyForm extends StatefulWidget {
   final User user;
@@ -205,7 +205,8 @@ class _ModifyFormState extends State<ModifyForm> {
                             text: this.model?.address ?? ""),
                         onTap: () async {
                           this.model = await Navigator.of(context).push(
-                            MaterialPageRoute(builder: (context) => Kopo()),
+                            MaterialPageRoute(
+                                builder: (context) => RemediKopo()),
                           );
                           _address1.text = this.model?.address;
 
@@ -233,7 +234,8 @@ class _ModifyFormState extends State<ModifyForm> {
                         text: "우편번호",
                         press: () async {
                           this.model = await Navigator.of(context).push(
-                            MaterialPageRoute(builder: (context) => Kopo()),
+                            MaterialPageRoute(
+                                builder: (context) => RemediKopo()),
                           );
                           setState(() {});
                         },

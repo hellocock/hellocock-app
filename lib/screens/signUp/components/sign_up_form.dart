@@ -8,7 +8,7 @@ import 'package:hellocock/screens/policy/service_policy/service_policy_screen.da
 import 'package:hellocock/screens/signIn/sign_in_screen.dart';
 import 'package:hellocock/size_config.dart';
 import 'package:hellocock/widgets/buttons/primary_button.dart';
-import 'package:kopo/kopo.dart';
+import 'package:remedi_kopo/remedi_kopo.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -321,7 +321,7 @@ class _SignUpFormState extends State<SignUpForm> {
                       TextEditingController(text: this.model?.address ?? ""),
                   onTap: () async {
                     this.model = await Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => Kopo()),
+                      MaterialPageRoute(builder: (context) => RemediKopo()),
                     );
                     _address1.text = this.model?.address;
 
@@ -351,7 +351,7 @@ class _SignUpFormState extends State<SignUpForm> {
                   text: "우편번호",
                   press: () async {
                     this.model = await Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => Kopo()),
+                      MaterialPageRoute(builder: (context) => RemediKopo()),
                     );
                     setState(() {});
                   },

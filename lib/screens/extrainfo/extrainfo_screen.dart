@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hellocock/screens/bottom_nav_bar.dart';
 import 'package:hellocock/widgets/buttons/primary_button.dart';
-import 'package:kopo/kopo.dart';
+import 'package:remedi_kopo/remedi_kopo.dart';
 
 import '../../constants.dart';
 import '../../size_config.dart';
@@ -160,7 +160,7 @@ class _ExtraInfoScreenState extends State<ExtraInfoScreen> {
                               onTap: () async {
                                 this.model = await Navigator.of(context).push(
                                   MaterialPageRoute(
-                                      builder: (context) => Kopo()),
+                                      builder: (context) => RemediKopo()),
                                 );
                                 _address1.text = this.model?.address;
 
@@ -190,7 +190,7 @@ class _ExtraInfoScreenState extends State<ExtraInfoScreen> {
                               press: () async {
                                 this.model = await Navigator.of(context).push(
                                   MaterialPageRoute(
-                                      builder: (context) => Kopo()),
+                                      builder: (context) => RemediKopo()),
                                 );
                                 setState(() {});
                               },
