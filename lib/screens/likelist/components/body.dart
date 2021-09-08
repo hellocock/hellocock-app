@@ -78,7 +78,7 @@ class Body extends StatelessWidget {
           children: [
             Expanded(
               child: CachedNetworkImage(
-                  imageUrl: document['cocktail_image'],
+                  imageUrl: document['image'],
                   width: double.infinity,
                   fit: BoxFit.fitWidth),
             ),

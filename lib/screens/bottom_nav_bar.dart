@@ -26,7 +26,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
 
   List<Map<String, dynamic>> _navitems = [
     {"icon": "assets/icons/home.svg", "title": "Home"},
-    //  {"icon": "assets/icons/virgin.svg", "title": "Virgin"},
+    {"icon": "assets/icons/virgin.svg", "title": "Virgin"},
     {"icon": "assets/icons/mycock.svg", "title": "My cock"},
     {"icon": "assets/icons/profile.svg", "title": "Profile"},
   ];
@@ -37,7 +37,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
     super.initState();
     _screens = [
       HomeScreen(widget.user),
-      //   VirginCocktailScreen(),
+      VirginCocktailScreen(widget.user),
       MyCockScreen(widget.user),
       ProfileScreen(widget.user),
     ];
@@ -86,7 +86,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
       ),
       title: SvgPicture.asset("assets/icons/hellocock_title.svg"),
       actions: [
-        if (_selectedIndex == 2 && widget.user != null)
+        if (_selectedIndex == 3 && widget.user != null)
           IconButton(
               icon: SvgPicture.asset("assets/icons/signout.svg"),
               color: kActiveColor,
@@ -146,12 +146,19 @@ class _BottomNavBarState extends State<BottomNavBar> {
   }
 
   SvgPicture buildSvgIcon({@required String src, bool isActive = false}) {
-    return SvgPicture.asset(
-      src,
-      width: 20,
-      height: 20,
-      color: kActiveColor,
-    );
+    return src != "assets/icons/virgin.svg"
+        ? SvgPicture.asset(
+            src,
+            width: 20,
+            height: 20,
+            color: kActiveColor,
+          )
+        : SvgPicture.asset(
+            src,
+            width: 20,
+            height: 25,
+            color: kActiveColor,
+          );
   }
 
   Widget buildDrawer(BuildContext context) {
@@ -240,16 +247,6 @@ class _BottomNavBarState extends State<BottomNavBar> {
                 ),
               ],
             ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Padding(
-                padding: const EdgeInsets.all(50.0),
-                child: Text(
-                  'v 1.0.0',
-                  style: TextStyle(color: kBodyTextColor),
-                ),
-              ),
-            )
           ],
         ),
       ),

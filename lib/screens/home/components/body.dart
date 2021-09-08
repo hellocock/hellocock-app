@@ -140,7 +140,7 @@ class _BodyState extends State<Body> {
             children: [
               Expanded(
                 child: CachedNetworkImage(
-                    imageUrl: document['image'],
+                    imageUrl: document['thumbnail'],
                     width: double.infinity,
                     fit: BoxFit.cover),
               ),

@@ -502,7 +502,7 @@ SPEC CHECKSUMS:
   sqflite: 6d358c025f5b867b29ed92fc697fd34924e11904
   SwiftOTP: ec3848f12a4541f29d96f6a0fe63dcbb8448d96f
   SwiftyBootpay: 134039f53fede9e74fa507348be32285e7fc2824
-  webview_flutter: d2b4d6c66968ad042ad94cbb791f5b72b4678a96
+  webview_flutter: 3603125dfd3bcbc9d8d418c3f80aeecf331c068b
 
 PODFILE CHECKSUM: 6aaeb8430da00b75b6b16504dd8d5def8128fe6d
 
