@@ -70,6 +70,7 @@ class _DeliveryState extends State<Delivery> {
               : Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
+                    
                       Text(
                         widget.cart['address'],
                         textScaleFactor: 1,
@@ -79,7 +80,14 @@ class _DeliveryState extends State<Delivery> {
                             fontWeight: FontWeight.bold),
                       ),
                       TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    AddShippingScreen(widget.user),
+                              ));
+                        },
                         child: Text(
                           "수정하기",
                           textScaleFactor: 1,

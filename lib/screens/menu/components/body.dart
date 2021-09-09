@@ -102,8 +102,8 @@ class _BodyState extends State<Body> {
                             borderRadius: BorderRadius.all(Radius.circular(12)),
                             child: CachedNetworkImage(
                               imageUrl: widget.store['image'],
-                              height: 140,
-                              width: 140,
+                              height: 130,
+                              width: 130,
                               fit: BoxFit.cover,
                             )),
                         HorizontalSpacing(),
@@ -115,13 +115,13 @@ class _BodyState extends State<Body> {
                                 widget.store['name'],
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold,
-                                    fontSize: 16,
+                                    fontSize: 15,
                                     color: kBodyTextColor),
                               ),
                               Text(
                                 widget.store['explain'].replaceAll("\\n", "\n"),
                                 style: TextStyle(
-                                    fontSize: 14,
+                                    fontSize: 13,
                                     color: kBodyTextColor,
                                     height: 1.3),
                               ),
@@ -131,7 +131,7 @@ class _BodyState extends State<Body> {
                                     fontSize: 14, color: kBodyTextColor),
                               ),
                               SizedBox(
-                                width: 200,
+                                width: 170,
                                 height: 35,
                                 child: RaisedButton(
                                   child: Row(
@@ -181,7 +181,7 @@ class _BodyState extends State<Body> {
                     );
                   },
                 ),
-                VerticalSpacing(of: 20),
+                VerticalSpacing(of: 50),
               ],
             ),
           ),

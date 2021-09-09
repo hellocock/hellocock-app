@@ -58,20 +58,20 @@ class _MenuCardState extends State<MenuCard> {
                 textScaleFactor: 1,
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: 15,
+                    fontSize: 14,
                     color: kBodyTextColor),
               ),
               Text(
                 widget.store['food'][widget.index]['explain']
                     .replaceAll("\\n", '\n'),
                 textScaleFactor: 1,
-                style: TextStyle(fontSize: 14, color: kBodyTextColor),
+                style: TextStyle(fontSize: 13, color: kBodyTextColor),
               ),
               VerticalSpacing(
                 of: 5,
               ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
@@ -84,7 +84,7 @@ class _MenuCardState extends State<MenuCard> {
                       color: Color(0xFFFF4D4D),
                     ),
                   ),
-                  HorizontalSpacing(of: 50),
+                  HorizontalSpacing(),
                   Card(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8.0),

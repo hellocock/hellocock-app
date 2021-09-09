@@ -53,7 +53,8 @@ class _StorePanelState extends State<StorePanel> {
               ],
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 30, left: 30.0, bottom: 15),
+              padding: const EdgeInsets.only(
+                  top: 30, left: 30.0, right: 30, bottom: 15),
               child: Text(
                 "픽업 장소 및 시간",
                 textScaleFactor: 1,
@@ -108,8 +109,8 @@ class _StorePanelState extends State<StorePanel> {
                 borderRadius: BorderRadius.all(Radius.circular(12)),
                 child: CachedNetworkImage(
                   imageUrl: document['image'],
-                  height: 140,
-                  width: 140,
+                  height: 130,
+                  width: 130,
                   fit: BoxFit.cover,
                 )),
             HorizontalSpacing(),
